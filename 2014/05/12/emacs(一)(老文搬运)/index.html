@@ -1,0 +1,394 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>emacs(一)(老文搬运) | qazwsxedc121&#39;s little blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="qazwsxedc121">
+    
+    <meta name="description" content="(原来在博客园上的文章,修改了一下去掉没有用的部分)
+最近在折腾emacs这个东西,首先说我曾经算是个极为坚定的VIM党,我在各种IDE里面基本都会要装VIM化的插件,而且我的浏览器Firefox一直有Vimperator这个插件,现在上网如果不能用d关网页/用t开tab就会觉得难受.那么我为啥还要">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="qazwsxedc121&#39;s little blog" title="qazwsxedc121&#39;s little blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="qazwsxedc121&#39;s little blog">qazwsxedc121&#39;s little blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/favorite">收藏夹</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:qazwsxedc121.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/12/emacs(一)(老文搬运)/" title="emacs(一)(老文搬运)" itemprop="url">emacs(一)(老文搬运)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://qazwsxedc121.github.io" title="qazwsxedc121">qazwsxedc121</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-12T03:01:55.000Z" itemprop="datePublished">5月 12 2014</time>
+    更新日期:<time datetime="2014-05-12T04:35:32.000Z" itemprop="dateModified">5月 12 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#防治小拇指抽搐"><span class="toc-number">1.</span> <span class="toc-text">防治小拇指抽搐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#站在巨人的肩膀上"><span class="toc-number">2.</span> <span class="toc-text">站在巨人的肩膀上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Package-el"><span class="toc-number">3.</span> <span class="toc-text">Package.el</span></a></li></ol>
+		</div>
+		
+		<p>(原来在博客园上的文章,修改了一下去掉没有用的部分)</p>
+<p>最近在折腾emacs这个东西,首先说我曾经算是个极为坚定的VIM党,我在各种IDE里面基本都会要装VIM化的插件,而且我的浏览器Firefox一直有<a href="http://www.vimperator.org/" target="_blank">Vimperator</a>这个插件,现在上网如果不能用d关网页/用t开tab就会觉得难受.那么我为啥还要搞emacs呢?而且眼看着sublime一天天变得流行起来,而emacs基本没什么新人在用,我为啥又在这个时候折腾emacs呢?</p>
+<p>理由其实也不是很充分,但是对我而言已经够了:</p>
+<ol>
+<li>Emacs是用Lisp的最经典的程序了,作为试图成为Lisper的人,emacs最起码应该使用过.君不见github上最流行的lisp方言就是emacs lisp(虽然绝大部分repo都是大家把各自的emacs配置放上去了而已)</li>
+<li>Emacs是Hacker的选择,首先开发者RMS神不用说了(如果不知道这位的话建议不要用Emacs来进行工作,我现在觉得Emacs也确实是不太适合大众用的东西,只适合对于文本编辑效率极高的人群,最典型的就是码农),其次大量知名人士使用 <a href="http://wenshanren.org/?p=386" target="_blank">著名Emacs用户列表</a> ,虽说并不是别人用什么你就改用什么,但至少你能确定这不是一个糟糕的选择.</li>
+<li>最近写clojure,对于括号的操作很重要,而paredit让写lisp轻松了一些.</li>
+<li>本人相对来说还是不是特别怕折腾的</li>
+</ol>
+<p><img src="http://qazwsxedc121-blog.qiniudn.com/emacs0001_0001.jpg" alt="(附Richard Matthew Stallman照片一张)"></p>
+<p>(附Richard Matthew Stallman照片一张)</p>
+<p>那么就开始折腾吧,之前对于emacs的复杂程度心里有所准备,所以知道这东西不会像sublime一样开箱就能用,果然第一个遇到的问题就是:怎么打开文件啊?</p>
+<p>先镇定,我之前用vim的时候就是各种操作不会,都只能找菜单,这里一样先找菜单再说,然后发现选了打开文件以后是要输文件路径的(囧).估计光是这一点就足够赶走无数的用户,真是用户交互设计的一大败笔,不过emacs这东西就不是给普通用户设计的,只有接受它的设定,才能达到我们的目标:提高效率.</p>
+<p>接下来学习的过程就不再叙述了,总之就是先Ctrl+h t看完了教程先,教程是英语的但是很好懂.然后就是一边开着手册一边试着编辑文件了.就和学习一门新语言一样,不断的写程序是最快能学会的方法.</p>
+<p><img src="http://qazwsxedc121-blog.qiniudn.com/emacs0001_0002.jpg" alt="image"></p>
+<p>别人的emacs是这样的</p>
+<p><img src="http://qazwsxedc121-blog.qiniudn.com/emacs0001_0003.jpg" alt="image">                                             </p>
+<p>我的emacs是这样的</p>
+<h2 id="防治小拇指抽搐">防治小拇指抽搐</h2>
+<p>学习的历程还是很漫长的,尤其是在Vim的肌肉记忆深深植根大脑的时候,令人愤怒的是你会发现Emacs的键位比较奇葩,不是很好按,不像Vim有模式可以不用修饰键,Emacs里面需要大量的Ctrl Shift Alt等等,这就大大加深了小拇指的负担.有人建议装脚踏板给Ctrl和Alt,我觉得这方案还挺好的,可惜这需求太小众,万能的淘宝都找不到合适的踏板,有一种但是看上去不给力且价格不理想.</p>
+<p>我这里建议把Capslock键改了,我之前使用Vim的时候是Capslock和ESC交换,现在则是Capslock直接改成Ctrl,因为capslock实在没有什么用.这样的话开vim的时候注意 Ctrl+[ 是和ESC起一样的作用的,这样就可以同时让Emac和Vim的按键都舒服许多.在Mac上还有点优势就是不需要装额外的软件就可以把键给改了.</p>
+<h2 id="站在巨人的肩膀上">站在巨人的肩膀上</h2>
+<p>既然emacs是是众所周知的难于配置,自然有拯救苍生的各位大大想让更多的菜鸟能用上神器.于是乎出现了不少文章帮助菜鸟度过难关,其实只要经常搜一下就会找到他们的博客,例如emacs中文网,李杀网等很多地方.另外还有些大大分享了他们的配置文件供我们上手快一些,我这里用的是emacs-starter-kit, 注意它的作者是leiningen的作者,非常值得借鉴.Emacs-starter-kit的github页面上有关于如何使用的说明.没有它的话天知道又有多少人会把光阴白白送在一些非常基础的设置之中了.</p>
+<h2 id="Package-el">Package.el</h2>
+<p>以前的Emacs的插件管理方式非常的原始,都是直接把插件的el文件放在.emac.d文件夹下,并不区分插件和配置文件,这对于插件的管理/升级/卸载都十分的不便,后来就有了package.el插件来帮助设置插件.最后Emacs的作者们终于在Emacs的24版中内置了插件管理,为我们省却了很多功夫.在安装emacs-starter-kit的时候指南上就介绍我们要在init.el中写</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="list">(<span class="title">require</span> 'package)</span>
+<span class="list">(<span class="title">add-to-list</span> 'package-archives
+             <span class="quoted">'(<span class="string">"marmalade"</span> . <span class="string">"http://marmalade-repo.org/packages/"</span>)</span> <span class="literal">t</span>)</span>
+<span class="list">(<span class="title">package-initialize</span>)</span>
+</pre></td></tr></table></figure>
+
+<p>这里第一行是说加载package.el这个包,2~3行说为package.el中加入marmalade的源来获取包,第4行是初始化包.刚开始的时候不需要明白到底这些都是啥.只要不要随便就删掉它们就好了.</p>
+<p>这些代码算是设置好了软件源,就跟我们在ubuntu上设apt-get的源一样.但是我在尝试sr-speedbar这个包的时候发现安装时会出一些问题,没有办法装上去,在github上找到了sr-speedbar的代码,发现由于兼容性问题在最近的2013年才被修正过,而marmalade上的版本是2009年的,就是说如果用marmalade的话就没有办法正确安装,我现在暂时还不会hack package中的代码(何况这样就失去了package打包安装的意义),尝试了一下byte-recompile等指令发现还是不太会,在即将放弃这个插件之际想到,如果有别的源说不定已经更新了,由此在emacs wiki上又找到了下面的配置</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="list">(<span class="title">setq</span> package-archives <span class="quoted">'((<span class="string">"gnu"</span> . <span class="string">"http://elpa.gnu.org/packages/"</span>)
+                         (<span class="string">"marmalade"</span> . <span class="string">"http://marmalade-repo.org/packages/"</span>)
+                         (<span class="string">"melpa"</span> . <span class="string">"http://melpa.milkbox.net/packages/"</span>))</span>)</span>
+</pre></td></tr></table></figure><br>用上面这3行取代前面的2~3行代码就可以了,其实意思就是将melpa这个源加入package的软件源而已.</p>
+<p>加入Melpa这个源以后,运行list-packages这个指令时会发现显著变慢了,然后可以看到很多版本号都变成了日期,同时后面会有[github]等字样,这是什么意思呢?上melpa这个网站可以看到,它的原理和marmalade是不同的,它基于版本控制系统自动生成package,就是说只要作者将代码更新了commit以后,melpa就会更新,不需要再等作者打包放到marmalade上面,而且如果原作者早就忘了更新这个事的话还有其他人帮忙更新代码,这样显然是更好的方式,sr-speedbar就是这样做的.</p>
+<p>所以当然立即将melpa加入-&gt;更新-&gt;搞定!</p>
+<p>现在emacs依然有很多人在为其开发插件,可以说其文件编辑功能依然是领先的.只是有不少老的插件没有为新版做更新,也需要整个社区的努力.</p>
+<p>就写这么多吧,一次写太多下次都不知道写啥了,我就一个初学者,下回就从头写写最基础的东西吧,如果你觉得翻manual和wiki看英语太难受的话不妨看下我的翻译.下回更新又不知何年何月了.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/emacs/">emacs</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://qazwsxedc121.github.io/2014/05/12/emacs(一)(老文搬运)/" data-title="emacs(一)(老文搬运) | qazwsxedc121&#39;s little blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/05/12/emacs(二)(老文搬运)/" title="emacs(二)(老文搬运)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  emacs(二)(老文搬运)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/05/05/一种公平的抽签办法/"  title="一种公平的抽签办法">
+ <strong>NEXT:</strong><br/> 
+ <span>一种公平的抽签办法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#防治小拇指抽搐"><span class="toc-number">1.</span> <span class="toc-text">防治小拇指抽搐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#站在巨人的肩膀上"><span class="toc-number">2.</span> <span class="toc-text">站在巨人的肩膀上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Package-el"><span class="toc-number">3.</span> <span class="toc-text">Package.el</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/emacs/" title="emacs">emacs<sup>4</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mobile/" title="mobile">mobile<sup>1</sup></a></li>
+		
+			<li><a href="/tags/技术/" title="技术">技术<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://qazwsxedc121.github.io" target="_blank" title="qazwsxedc121">qazwsxedc121</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"qazwsxedc121"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,363 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>一种公平的抽签办法 | qazwsxedc121&#39;s little blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="qazwsxedc121">
+    
+    <meta name="description" content="如何让所有人都能确信一个抽奖是公平的?这是一个问题.
+当然现在大家所用的方法是将彩票机的抽取过程给录制视频了,但实际上依然有不少人会指责视频有假,大家自行搜索”福利彩票内幕”之类的东西也能了解到.我不确定其真假也不想妄加评论,但是之后产生了一个想法:如何做到让参与者能确信这个结果是”随机抽取”,而不">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="qazwsxedc121&#39;s little blog" title="qazwsxedc121&#39;s little blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="qazwsxedc121&#39;s little blog">qazwsxedc121&#39;s little blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/favorite">收藏夹</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:qazwsxedc121.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/05/一种公平的抽签办法/" title="一种公平的抽签办法" itemprop="url">一种公平的抽签办法</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://qazwsxedc121.github.io" title="qazwsxedc121">qazwsxedc121</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-04T23:10:02.000Z" itemprop="datePublished">5月 5 2014</time>
+    更新日期:<time datetime="2014-05-05T00:03:49.000Z" itemprop="dateModified">5月 5 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p>如何让所有人都能确信一个抽奖是公平的?这是一个问题.</p>
+<p>当然现在大家所用的方法是将彩票机的抽取过程给录制视频了,但实际上依然有不少人会指责视频有假,大家自行搜索”福利彩票内幕”之类的东西也能了解到.我不确定其真假也不想妄加评论,但是之后产生了一个想法:如何做到让参与者能确信这个结果是”随机抽取”,而不是”刻意分配”的?</p>
+<p>我近来想到一种方法,通过sha或者md5这种类型的算法来做抽奖过程.原理很简单,我们假设将每个人的名字连成一个字符串.然后对这个字符串做sha256,将得到的结果值取mod(抽奖的人数),这样会得到一个整数,表示抽奖的人的序号.(算法0)当然,现在我们这个算法还有问题,接下来就逐渐解决他们.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="setting">winner = <span class="value">sha256(<span class="string">"张三李四王五"</span>) % <span class="number">3</span></span></span>
+</pre></td></tr></table></figure>
+
+<p>首先:这个抽奖结果貌似是固定的? 是的,在参与人的顺序和名字不变的前提下当然得到的sha256值是固定的,也就是说同样这么多人只会产生一样的结果.那么怎么改进呢?我们可以让每个人改动自己的名字!其实也就是让每个人自己选择要用什么信息加入这个大字符串,这里我们稍微变化一下,让每个人的信息为”邮箱”+”自选字符串”,用邮箱来作为id,防止一个人参与很多次.为什么不直接是自选字符串是因为怕其他人懒,只选择空字符串,这样会对小型的抽奖来说存在不稳定因素.(算法1)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>winner = sha256(<span class="string">"zhangsan<span class="variable">@t</span>.com我是张三lisi<span class="variable">@t</span>.comwangwu<span class="variable">@t</span>.com"</span>) % <span class="number">3</span>
+</pre></td></tr></table></figure>
+
+<p>这里其实就可以在实际的抽奖中使用了,为什么它是公平的呢? 是因为每个参与者都可以完全的改变抽奖的结果.这一点是由sha或者md系列的信息摘要算法保证的,只要一个字符串有任何一点改动,我们都可以知道改动前后的摘要结果是完全不同的,每一个参与者提供的自选字符串事实上都对结果重新洗牌,因为不止有一个参与者,所以这个结果是不可能被”决定”的而抽奖结束之后参与和就可以根据公布出来的数据来自行验证抽奖没有作弊了.</p>
+<p>另外还有一些问题,随着参与者的增加抽奖结果在不断变化! 是的,但是实际中所有的抽奖都会有截止日期的概念,也就是说其实抽奖开始时参与者都已经确定了,故而不会存在结果会变的问题.</p>
+<p>如果考虑作弊的话,最后一名参与者是可能作弊的? 如果最后一名参与者掌握了之前所有参与者的信息的话的确有可能会作弊,即他可以尝试任意的字符串,(因为他自己可以做无数次抽奖),直到结果指向他自己,或者某个特定的参与者. 这种行为又如何避免呢? 事实上可以通过加入时间的因素来避免作弊, 即将我们的”邮箱”+”自选字符串”+”时间戳”作为每个人的信息的一部分(算法3),这样最后一个参与者需要考虑他自己的时间戳的问题,而他并不知道自己的时间戳会在什么时间(服务器的时间戳可以自定义).这样的话就能保证即便最后一名参与者即使有之前所有人的数据也不能成功,何况可能会存在同样赶在截止时间前提交的参与者打乱他的计划.</p>
+<p>主要过程就是这样,其实很好理解,验证也很方便,下载数据自己跑一遍就得了.”什么?得奖的为什么不是我?那要怪我自己的自选字符串没有碰对运气.”</p>
+<p>我自己做了一个网站,还没有上线,但是整套东西都是开源的,地址在<a href="https://github.com/qazwsxedc121/fair-lottery" target="_blank">fair lottery</a>,只需要有clojure环境和mongodb数据库既可以运行于自己的服务器上.欢迎提交issue来提出你想要的功能.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/技术/">技术</a><a href="/tags/idea/">idea</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://qazwsxedc121.github.io/2014/05/05/一种公平的抽签办法/" data-title="一种公平的抽签办法 | qazwsxedc121&#39;s little blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/05/12/emacs(一)(老文搬运)/" title="emacs(一)(老文搬运)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  emacs(一)(老文搬运)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/04/19/hello-world/"  title="第一篇博客">
+ <strong>NEXT:</strong><br/> 
+ <span>第一篇博客
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/emacs/" title="emacs">emacs<sup>4</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mobile/" title="mobile">mobile<sup>1</sup></a></li>
+		
+			<li><a href="/tags/技术/" title="技术">技术<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://qazwsxedc121.github.io" target="_blank" title="qazwsxedc121">qazwsxedc121</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"qazwsxedc121"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,393 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>emacs(二)(老文搬运) | qazwsxedc121&#39;s little blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="qazwsxedc121">
+    
+    <meta name="description" content="既然之前说过要写我怎么继续折腾Emacs的,过了一个星期这里就是第二篇了,突然觉得我把blog这样分节不是很好,每次可能要凑一些东西才有该有的篇幅,而且说的东西可能东一点西一点,这样一篇看下来不利于检索,所以这一篇过后会按主题来写,不再用原来的形式,有一点写一点,每次围绕一个主题来,这样比较好阅读一">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="qazwsxedc121&#39;s little blog" title="qazwsxedc121&#39;s little blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="qazwsxedc121&#39;s little blog">qazwsxedc121&#39;s little blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/favorite">收藏夹</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:qazwsxedc121.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/12/emacs(二)(老文搬运)/" title="emacs(二)(老文搬运)" itemprop="url">emacs(二)(老文搬运)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://qazwsxedc121.github.io" title="qazwsxedc121">qazwsxedc121</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-12T04:21:45.000Z" itemprop="datePublished">5月 12 2014</time>
+    更新日期:<time datetime="2014-05-13T15:01:49.000Z" itemprop="dateModified">5月 13 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sublime_text"><span class="toc-number">1.</span> <span class="toc-text">Sublime text</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相对于sublime_text来说emacs缺少一个好的插件管理系统"><span class="toc-number">2.</span> <span class="toc-text">相对于sublime text来说emacs缺少一个好的插件管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs的键位设置"><span class="toc-number">3.</span> <span class="toc-text">emacs的键位设置</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右移动"><span class="toc-number">3.1.</span> <span class="toc-text">上下左右移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开保存文件"><span class="toc-number">3.2.</span> <span class="toc-text">打开保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按行操作"><span class="toc-number">3.3.</span> <span class="toc-text">按行操作</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs的配置保存"><span class="toc-number">4.</span> <span class="toc-text">Emacs的配置保存</span></a></li></ol>
+		</div>
+		
+		<p>既然之前说过要写我怎么继续折腾Emacs的,过了一个星期这里就是第二篇了,突然觉得我把blog这样分节不是很好,每次可能要凑一些东西才有该有的篇幅,而且说的东西可能东一点西一点,这样一篇看下来不利于检索,所以这一篇过后会按主题来写,不再用原来的形式,有一点写一点,每次围绕一个主题来,这样比较好阅读一些.</p>
+<p>今天写一些Emacs我刚入门遇到的困难,这里我拿目前很流行的sublime来与emacs做一个比较,看看emacs到底有哪些难处让人很难上手:</p>
+<h2 id="Sublime_text">Sublime text</h2>
+<p>首先介绍下sublime text, 这个编辑器最近极为流行,也确实非常的好用,别的不说,从默认安装过后就会发现这个作者还是非常懂码农的,默认的配色就是molokai,虽然有些人不太喜欢这个配色,不过从vim的插件数量统计上就可以看到它有多么的流行.(当然我们的emacs如此的强大,区区一个配色方案还是有的.)一般来说写代码的话大部分人还是喜好偏暗的配色,比较不伤眼,而且颜色比较容易分辨.另外我们从图上也能看出来,sublime默认就有左边的一个小型的文件管理器(或者说project浏览器),默认就有行号,右边有代码地图,上面有tab,而这些都是默认配置!!不要小看默认配置,ruby on rails的一条最重要的原则就是约定大于配置,默认就把所有事情做好这一点太重要了,多少人想学emacs结果连键位都还不熟还得天天看着80年代机器一样的界面,打开配置文件以后又是”完全无法理解”的语言,就这样放弃了emacs.</p>
+<p><img src="http://qazwsxedc121-blog.qiniudn.com/emacs0002_0001.jpg" alt="sublime靓照一张"></p>
+<h2 id="相对于sublime_text来说emacs缺少一个好的插件管理系统">相对于sublime text来说emacs缺少一个好的插件管理系统</h2>
+<p>这个问题在emacs24版终于被部分解决了,之前一篇也提到过这个问题,现在有了melpa这个和github社区力量结合的东西,写一个插件并发布变得十分简单,而且插件可以保持更新,这一点我觉得emacs已经做的不错了,也正是因为emacs开发者不断的努力,才使得emacs user还是不断有新人来学习和使用.今年来lisp方言的流行(比如我就是为了写clojure才用emacs的),各种小众语言没有IDE的支持,语言作者往往都倾向于先写一个emacs的mode来使用,clojure-mode至今仍是众多开发人员的首选clojure编辑环境,所有的lisp方言基本都是这么个状况.而且最近已经广泛普及的python和ruby在emacs上相应的插件都功能非常强大,比如python-mode我觉得使用熟悉以后效率比原来用pycharm还高.</p>
+<p><img src="http://qazwsxedc121-blog.qiniudn.com/emacs0002_0002.jpg" alt="我安装的一些插件"></p>
+<p>说了半天好像在说emacs的好话,可能也是我近期都比较倾心于emacs的缘故.在插件系统上emacs的缺点是emacs lisp实在学习成本比sublime用python做插件来的高一些.这样将许多想按自己设想做插件的人拒之门外,不过我觉得相对于emacs如此高的学习成本来说emacs lisp反倒不应该是一个障碍,lisp我认为作为一个想提升自己的程序员都应该学习一下,就算知道一点皮毛最起码也拓宽了您的眼界不是?</p>
+<p>emacs的插件群很大,而且不断有新的插件加入进来,上图是我接触了一点时间安装的一些插件,另外透露一下按我上一篇博客设置了源以后你就可以看到有1400多个插件可以安装啦.这在所有编辑器中应该是最多的了吧.</p>
+<h2 id="emacs的键位设置">emacs的键位设置</h2>
+<p>这是我面临的很大的问题,特别是由于从vim转过来的,经常会打着打着突然ESC+hjkl,其实论纯文本编辑效率来说vim确实比emacs强.但是emacs这个东西更加适用于写,就是将脑中的内容敲入屏幕中这个过程.但不得不说是一个非常大的问题,我分一些点说,这块实在非常想吐槽.</p>
+<h3 id="上下左右移动">上下左右移动</h3>
+<p>习惯了vim的人会觉得我这辈子在文本编辑器里面再也不用按上下左右四个键了,我甚至觉得相对于emacs user来说vim user更加适合HHKB这个神器,反正我最近自己还是买了realforce 104(不过也有点打游戏的因素在里面,有些游戏没有小键盘不好打).</p>
+<p>我们来看看emacs的上下左右: 上 -&gt; Ctrl+p(revious) 下-&gt; Ctrl+n(ext)    左-&gt; Ctrl+f(orward)   右-&gt;Ctrl+b(ack) ,让人无比的蛋疼有没有?虽然可以配置,但是有没有想过其他绑定在上面的健怎么办?我到现在还是觉得这么按非常难受,就算把Capslock改成了Ctrl依旧让小拇指的工作强度大大增加.解决方法是可以装个Evil插件,模拟vim用,我现在暂时还不想这么干.目前我又用回了上下左右+鼠标,只有大概一半的时间会用Ctrl+pnfb吧,我发现Meta+pnfb还是比较好用的,但也不是很经常用.到时Ctrl+a移到行首和Ctrl+e移到行尾个人认为比vim的0和$强一些.</p>
+<h3 id="打开保存文件">打开保存文件</h3>
+<p>emacs的打开文件对新手简直就是恶梦:输入文件路径打开文件!你可以想像一个新手层层输入文件的绝对路径只为编辑一个文件心中有多郁闷么?而且不像gvim尚且提供给你一个windows风格的打开文件对话框来让你找文件,就算点菜单你也只能老老实实地输入路径,而且打开文件的快捷键也很囧Ctrl+x Ctrl+f (以后我还是按官方的规范写法C-x C-f来写了).您就不能跟别的软件通用一下么?不过emacs为了考虑通用性没有加入mac上的cmd键和windows上的win键,我以后另开一篇写emacs的无伤按键配置好了.</p>
+<p>保存文件的快捷键是C-x C-s,其实大概用个十几回也差不多熟悉了.</p>
+<h3 id="按行操作">按行操作</h3>
+<p>vim有dd , yy,J等极为方便的操作,我个人反正已经离不开了,emacs的习惯有些不太一样,这些操作在emacs没有等价的快捷键,我只是列一下我的方式</p>
+<p>dd删除一行:我一般是用C-a移到行首,然后C-k C-k删除一行的,按键比较繁琐,但是也凑合了</p>
+<p>p粘贴回来,这个emacs里面用C-y(ank)</p>
+<p>J连接2行,这个要先C-n移到下一行,然后M-^连接到上一行(Emacs的join是将本行与上一行连接,所以要先下一行)</p>
+<p>吐槽了半天其实也没用,我今后尽量摸索和学习出来一套更加合理的按键配置再推荐给大家.</p>
+<h2 id="Emacs的配置保存">Emacs的配置保存</h2>
+<p> 之前用vim也有这个问题,如果换了一台机器,想让vim重新回到适应的状态需要很长时间的配置,需要把插件什么的装回来,总之就是各种麻烦.而如果我用sublime呢?直接用就可以了,sublime很好的初始配置基本做到了开箱即用,而emacs想要下一个安装文件就开始用,我觉得还不如开记事本.这个问题曾经让我屡次受挫,总是找不到一个好的方案.出现了网盘这个东西以后,可以把配置文件存一份网盘备用,但是你只要升级一下或者更新一遍就需要重新放到网盘里面.更何况如果你用U盘的话会面临丢失的问题.</p>
+<p>直到现在,我终于找到了一个解决方案,它就是git.虽然git严格来说就是一个版本管理工具,但是它确实是一个保存配置非常好的方案,我把我的配置文件放到了github上,不过只是作为自己快速让自己的emacs进入工作状态,没有什么参考价值,地址在这里 ,大家要学习emacs配置的话我觉得steve purcell的配置 应该是在地球上能找到的最好的配置了,其实就直接拿他的配置替代emacs starter kit我觉得也非常好.另外DEA 也是emacs中文网的一个作者的非常完备的配置.</p>
+<p>要使用git来备份自己的emacs配置首先要会用git,这里容我强烈推荐一个软件SourceTree,一个免费的版本控制客户端,我觉得在还不熟git命令行的情况下可以用它,虽然要求注册atlassian账号,但是软件是免费的.git的基本操作我也不详细说了,这里写一下我的gitignore,大家可以结合别人的gitignore来防止git把一些没什么用的东西上传上去.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="preprocessor">.smex</span>-items
+/auto-save-list
+/backups
+<span class="preprocessor">.DS</span>_Store
+places
+/url/cookies
+*<span class="preprocessor">.elc</span>
+*<span class="preprocessor">.el</span><span class="preprocessor">#</span>
+</pre></td></tr></table></figure>
+
+<p>其实还是非常不完备,以后我的github上也会不断更新</p>
+<p>就这些吧,虽然还有很多要写的,留到以后分主题来写了.也容我多折腾一段时间积累些经验.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/emacs/">emacs</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://qazwsxedc121.github.io/2014/05/12/emacs(二)(老文搬运)/" data-title="emacs(二)(老文搬运) | qazwsxedc121&#39;s little blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/05/13/emacs(三)(老文搬运)/" title="emacs(三)(老文搬运)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  emacs(三)(老文搬运)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/05/12/emacs(一)(老文搬运)/"  title="emacs(一)(老文搬运)">
+ <strong>NEXT:</strong><br/> 
+ <span>emacs(一)(老文搬运)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sublime_text"><span class="toc-number">1.</span> <span class="toc-text">Sublime text</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相对于sublime_text来说emacs缺少一个好的插件管理系统"><span class="toc-number">2.</span> <span class="toc-text">相对于sublime text来说emacs缺少一个好的插件管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs的键位设置"><span class="toc-number">3.</span> <span class="toc-text">emacs的键位设置</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右移动"><span class="toc-number">3.1.</span> <span class="toc-text">上下左右移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开保存文件"><span class="toc-number">3.2.</span> <span class="toc-text">打开保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按行操作"><span class="toc-number">3.3.</span> <span class="toc-text">按行操作</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs的配置保存"><span class="toc-number">4.</span> <span class="toc-text">Emacs的配置保存</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/emacs/" title="emacs">emacs<sup>4</sup></a></li>
+		
+			<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mobile/" title="mobile">mobile<sup>1</sup></a></li>
+		
+			<li><a href="/tags/技术/" title="技术">技术<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://qazwsxedc121.github.io" target="_blank" title="qazwsxedc121">qazwsxedc121</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"qazwsxedc121"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>

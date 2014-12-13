@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -92,11 +93,7 @@
 		<h2 id="Speedbar">Speedbar</h2>
 <p>首先是speedbar,这个东西是emacs自带的,效果立竿见影,请输入M-x speedbar就可以看到,就是一个简单的文件树,对于sublime text熟悉的同学这玩意应该已经一目了然了,但是这个东西经过一段时间的使用可能会存在一些问题,我现在感觉speedbar离sublime text的左栏还是有一点距离的.不过当然也有一些弥补的办法.</p>
 <p>首先,这个speedbar是单独一个窗口的,这对于窗口分配来说有一点不爽了,因为几乎所有的ide和编辑器都是在一起的,但是没有问题,请M-x list-package找sr-speedbar,然后配置你的文件,加入如下代码就可以了</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="list">(<span class="title">require</span> 'sr-speedbar)</span><span class="comment">;;这句话是必须的</span>
-<span class="list">(<span class="title">add-hook</span> 'after-init-hook <span class="quoted">'(lambda () (sr-speedbar-toggle))</span>)</span><span class="comment">;;开启程序即启用</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="list">(<span class="title">require</span> <span class="quoted">'sr-speedbar</span>)</span><span class="comment">;;这句话是必须的</span></div><div class="line"><span class="list">(<span class="title">add-hook</span> <span class="quoted">'after-init-hook</span> <span class="quoted">'(lambda () (sr-speedbar-toggle))</span>)</span><span class="comment">;;开启程序即启用</span></div></pre></td></tr></table></figure>
 
 <p>解释一下,第一行是必须的,但是第二行是如果你想开启emacs的时候这个东西就在的话可以加入这句话.另外在customize(输入M-x customize)里面可以有很多调节speedbar的地方,首先我们需要speedbar出现在左边,这里就要把Sr Speedbar Right Side:设为off.然后如果要在speedbar里面看所有文件的话(默认只显示emacs认识的文件)需要把Speedbar Show Unknown Files设置为on.或者说可以把常见到的需要加入speedbar中的文件的后缀名加入.这样设置基本上够用了.</p>
 <p>前面说了我怎么配置speedbar的,接下来吐槽一些还需要改进的地方,也许是我没有钻研透的因素,我认为目前有一些不足:</p>
@@ -115,18 +112,14 @@
 <p>在用惯了浏览器和标签式文本编辑器的我们可以说对于一个主力文本编辑器居然没有tab来切换buffer,而是用C-x b来切换buffer有些不能忍,于是理所应当的立即上tabbar,虽然StackOverFlow上有高手说tabbar不符合emacs熟练使用者的习惯,但是我作为初学者,应该先拿tabbar将就一下应该也未尝不可.</p>
 <p>tabbar安装也是轻松又愉快地在list-package里面或者直接package-install安装,同speedbar一样我有些不满它的外观,所以安装了tabbar-ruler插件,这样会把tabbar整合到ruler栏里面,而且在打字的时候会出现ruler,移动鼠标又能变回tabbar,我觉得实在非常好用.</p>
 <p>配置的话我就一条</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="list">(<span class="title">add-hook</span> 'after-init-hook '<span class="list">(<span class="title">lambda</span> <span class="list">()</span> <span class="list">(<span class="title">tabbar-ruler-up</span>)</span>)</span>)</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="list">(<span class="title">add-hook</span> 'after-init-hook '<span class="list">(<span class="title">lambda</span> <span class="list">()</span> <span class="list">(<span class="title">tabbar-ruler-up</span>)</span>)</span>)</span></div></pre></td></tr></table></figure>
 
 <p>就是默认开了程序就启用tabbar,加上用customize启用了tabbar-ruler-global-ruler和tabbar-ruler-global-tabbar,这样tabbar就长存于窗口上了.</p>
 <p>这里要解释下tabbar的逻辑和我们平常用的文本编辑器有些不一样(虽然可以调成一样的,但是我个人认为tabbar默认的更好),tabbar的显示并不是直接把所有的buffer都列出来直接显示在上面,这样的话谁看谁不爽,因为有太多例如<em>strach</em>这种关了又没准要用,不关又觉得碍眼的东西在.于是tabbar做出了创新:分组.</p>
 <p>tabbar的buffer的分组是将两个用一样major mode的buffer分到一组,就是说,你自然可以看到你的python文件在一组,你的html又在一组,这样平均每组都有标签,找标签的时候也不用一个一个去找了,先通过模式找更好.左上角的上下箭头就是切换tabbar显示mode还是显示buffer名的.</p>
 <h2 id="Linum-mode">Linum-mode</h2>
 <p>最后来介绍的最简单的,linum-mode,这东西就只有一个功能:显示行号,而且是emacs自带的,配置也很简单,(line-number-mode t)就可以了,这个可以在customize里面设置,唯一要注意的一点是它和speedbar有点冲突,所以我们需要在speedbar的window里面关闭它</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="list">(<span class="title">add-hook</span> 'speedbar-mode-hook '<span class="list">(<span class="title">lambda</span> <span class="list">()</span> <span class="list">(<span class="title">linum-mode</span> -1)</span>)</span>)</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="list">(<span class="title">add-hook</span> 'speedbar-mode-hook '<span class="list">(<span class="title">lambda</span> <span class="list">()</span> <span class="list">(<span class="title">linum-mode</span> -1)</span>)</span>)</span></div></pre></td></tr></table></figure>
 
 <p>这样就搞定了.</p>
 <p>总的的来说emacs还是一个步步折腾的过程,但是我在其中感觉还是很好的,配置这些纠结的东西也是一个学习的过程,配出自己顺手的编辑器我个人觉得还是非常提升效率的,我已经把最常用的clojure开发基本上切换到了emacs上来.IntelliJ IDEA只是作为辅助.</p>

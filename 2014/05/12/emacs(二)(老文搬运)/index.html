@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -85,7 +86,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sublime_text"><span class="toc-number">1.</span> <span class="toc-text">Sublime text</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相对于sublime_text来说emacs缺少一个好的插件管理系统"><span class="toc-number">2.</span> <span class="toc-text">相对于sublime text来说emacs缺少一个好的插件管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs的键位设置"><span class="toc-number">3.</span> <span class="toc-text">emacs的键位设置</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右移动"><span class="toc-number">3.1.</span> <span class="toc-text">上下左右移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开保存文件"><span class="toc-number">3.2.</span> <span class="toc-text">打开保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按行操作"><span class="toc-number">3.3.</span> <span class="toc-text">按行操作</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs的配置保存"><span class="toc-number">4.</span> <span class="toc-text">Emacs的配置保存</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sublime_text"><span class="toc-number">1.</span> <span class="toc-text">Sublime text</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相对于sublime_text来说emacs缺少一个好的插件管理系统"><span class="toc-number">2.</span> <span class="toc-text">相对于sublime text来说emacs缺少一个好的插件管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs的键位设置"><span class="toc-number">3.</span> <span class="toc-text">emacs的键位设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右移动"><span class="toc-number">3.1.</span> <span class="toc-text">上下左右移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开保存文件"><span class="toc-number">3.2.</span> <span class="toc-text">打开保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按行操作"><span class="toc-number">3.3.</span> <span class="toc-text">按行操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs的配置保存"><span class="toc-number">4.</span> <span class="toc-text">Emacs的配置保存</span></a></li></ol>
 		</div>
 		
 		<p>既然之前说过要写我怎么继续折腾Emacs的,过了一个星期这里就是第二篇了,突然觉得我把blog这样分节不是很好,每次可能要凑一些东西才有该有的篇幅,而且说的东西可能东一点西一点,这样一篇看下来不利于检索,所以这一篇过后会按主题来写,不再用原来的形式,有一点写一点,每次围绕一个主题来,这样比较好阅读一些.</p>
@@ -116,23 +117,7 @@
 <p> 之前用vim也有这个问题,如果换了一台机器,想让vim重新回到适应的状态需要很长时间的配置,需要把插件什么的装回来,总之就是各种麻烦.而如果我用sublime呢?直接用就可以了,sublime很好的初始配置基本做到了开箱即用,而emacs想要下一个安装文件就开始用,我觉得还不如开记事本.这个问题曾经让我屡次受挫,总是找不到一个好的方案.出现了网盘这个东西以后,可以把配置文件存一份网盘备用,但是你只要升级一下或者更新一遍就需要重新放到网盘里面.更何况如果你用U盘的话会面临丢失的问题.</p>
 <p>直到现在,我终于找到了一个解决方案,它就是git.虽然git严格来说就是一个版本管理工具,但是它确实是一个保存配置非常好的方案,我把我的配置文件放到了github上,不过只是作为自己快速让自己的emacs进入工作状态,没有什么参考价值,地址在这里 ,大家要学习emacs配置的话我觉得steve purcell的配置 应该是在地球上能找到的最好的配置了,其实就直接拿他的配置替代emacs starter kit我觉得也非常好.另外DEA 也是emacs中文网的一个作者的非常完备的配置.</p>
 <p>要使用git来备份自己的emacs配置首先要会用git,这里容我强烈推荐一个软件SourceTree,一个免费的版本控制客户端,我觉得在还不熟git命令行的情况下可以用它,虽然要求注册atlassian账号,但是软件是免费的.git的基本操作我也不详细说了,这里写一下我的gitignore,大家可以结合别人的gitignore来防止git把一些没什么用的东西上传上去.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="preprocessor">.smex</span>-items
-/auto-save-list
-/backups
-<span class="preprocessor">.DS</span>_Store
-places
-/url/cookies
-*<span class="preprocessor">.elc</span>
-*<span class="preprocessor">.el</span><span class="preprocessor">#</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.smex-items</div><div class="line">/auto-save-list</div><div class="line">/backups</div><div class="line">.DS_Store</div><div class="line">places</div><div class="line">/url/cookies</div><div class="line"><span class="keyword">*</span>.elc</div><div class="line"><span class="keyword">*</span>.el<span class="comment">#</span></div></pre></td></tr></table></figure>
 
 <p>其实还是非常不完备,以后我的github上也会不断更新</p>
 <p>就这些吧,虽然还有很多要写的,留到以后分主题来写了.也容我多折腾一段时间积累些经验.</p>
@@ -188,7 +173,7 @@ places
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sublime_text"><span class="toc-number">1.</span> <span class="toc-text">Sublime text</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相对于sublime_text来说emacs缺少一个好的插件管理系统"><span class="toc-number">2.</span> <span class="toc-text">相对于sublime text来说emacs缺少一个好的插件管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs的键位设置"><span class="toc-number">3.</span> <span class="toc-text">emacs的键位设置</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右移动"><span class="toc-number">3.1.</span> <span class="toc-text">上下左右移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开保存文件"><span class="toc-number">3.2.</span> <span class="toc-text">打开保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按行操作"><span class="toc-number">3.3.</span> <span class="toc-text">按行操作</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs的配置保存"><span class="toc-number">4.</span> <span class="toc-text">Emacs的配置保存</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sublime_text"><span class="toc-number">1.</span> <span class="toc-text">Sublime text</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相对于sublime_text来说emacs缺少一个好的插件管理系统"><span class="toc-number">2.</span> <span class="toc-text">相对于sublime text来说emacs缺少一个好的插件管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs的键位设置"><span class="toc-number">3.</span> <span class="toc-text">emacs的键位设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#上下左右移动"><span class="toc-number">3.1.</span> <span class="toc-text">上下左右移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开保存文件"><span class="toc-number">3.2.</span> <span class="toc-text">打开保存文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按行操作"><span class="toc-number">3.3.</span> <span class="toc-text">按行操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs的配置保存"><span class="toc-number">4.</span> <span class="toc-text">Emacs的配置保存</span></a></li></ol>
   </div>
 
 <div id="asidepart">

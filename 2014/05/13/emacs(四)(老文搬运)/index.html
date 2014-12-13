@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -100,102 +101,16 @@
 <h2 id="Yasnippet">Yasnippet</h2>
 <p>Yasnippet是Yet Another Snippet的简称,说明在snippet方面之前已经有不少前人做过工作了,而yasnippet最出名无疑是因为它最好的做到了大家心目中足够好用的snippet的标准.</p>
 <p>安装yasnippet很简单,我们的老办法list-packages和package-install都可以用,我个人觉得这个东西在今后基本上都需要(本职工作码农),所以就和linum一样设置成了全局的,配置如下</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="comment">;;yasnippet config</span>
-<span class="list">(<span class="title">require</span> 'yasnippet)</span>
-<span class="list">(<span class="title">yas-global-mode</span> <span class="number">1</span>)</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;;yasnippet config</span></div><div class="line"><span class="list">(<span class="title">require</span> <span class="quoted">'yasnippet</span>)</span></div><div class="line"><span class="list">(<span class="title">yas-global-mode</span> <span class="number">1</span>)</span></div></pre></td></tr></table></figure>
 
 <p>然后,我经常写clojure,但是yasnippet并没有针对clojure的默认snippet,于是又找了clojure-snippet,就在list-package里面,非常方便.<br>编写snippet</p>
 <p>我们一上来就是可以用默认的snippet工作的,如果我们需要自定义snippet呢?毕竟作者在github里面说了不再会加入更多的snippet,而是把这一工作开放给其他人,可以找一些好的snippet collection使用.</p>
 <p>如果我们要自定义snippet的话,可以任意打开一个snippet的文件:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="preprocessor"># name: FILE *fp = fopen(..., ...);</span>
-<span class="preprocessor"># key: fopen</span>
-<span class="preprocessor"># --</span>
-FILE *${fp} = fopen(${<span class="string">"file"</span>}, <span class="string">"${r}"</span>);
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor"># name: FILE *fp = fopen(..., ...);</span></div><div class="line"><span class="preprocessor"># key: fopen</span></div><div class="line"><span class="preprocessor"># --</span></div><div class="line">FILE *${fp} = fopen(${<span class="string">"file"</span>}, <span class="string">"${r}"</span>);</div></pre></td></tr></table></figure>
 
 <p>这个是c语言的fopen的snippet,很好懂,fopen后按tab,就会跳出最下面一行(模板),被${}包围的就是要填的”空”,而包围的东西是默认值,如果直接按tab略过的话就会保留默认值.第二行key: fopen表明这个snippet的触发器是fopen,只有fopen+TAB才能触发这个snippet.</p>
 <p>当然snippet编写远不止这么简单:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-</pre></td><td class="code"><pre><span class="comment"># -*- coding: utf-8 -*-</span>
-<span class="comment"># name: def</span>
-<span class="comment"># contributor: Orestis Markou</span>
-<span class="comment"># contributor: Yasser González Fernández &lt;yglez<span class="yardoctag">@uh</span>.cu&gt;</span>
-<span class="comment"># key: def</span>
-<span class="comment"># --</span>
-<span class="function"><span class="keyword">def</span> </span><span class="variable">${</span><span class="number">1</span><span class="symbol">:name</span>}(<span class="variable">$2</span>)<span class="symbol">:</span>
-    <span class="string">""</span><span class="string">"$3
-    ${2:$
-      (let*
-        ((indent
-            (concat "</span>\n<span class="string">" (make-string (current-column) 32)))
-           (args
-            (mapconcat
-             '(lambda (x)
-                (if (not (string= (nth 0 x) "</span><span class="string">"))
-                    (concat "</span>- <span class="string">" (char-to-string 96) (nth 0 x)
-                            (char-to-string 96) "</span><span class="symbol">:<span class="string">")))
-             (mapcar
-              '(lambda (x)
-                 (mapcar
-                  '(lambda (x)
-                     (replace-regexp-in-string "</span></span>[[<span class="symbol">:blank</span><span class="symbol">:</span>]]*<span class="variable">$"</span> <span class="string">""</span>
-                      (replace-regexp-<span class="keyword">in</span>-string <span class="string">"^[[:blank:]]*"</span> <span class="string">""</span> x)))
-                  x))
-              (mapcar <span class="string">'(lambda (x) (split-string x "="))
-                      (split-string text ",")))
-             indent)))
-      (if (string= args "")
-          (make-string 3 34)
-        (mapconcat
-         '</span>identity
-         (list <span class="string">""</span> <span class="string">"Arguments:"</span> args (make-string <span class="number">3</span> <span class="number">34</span>))
-         indent)))
-    }
-    <span class="variable">$0</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># name: def</span></div><div class="line"><span class="comment"># contributor: Orestis Markou</span></div><div class="line"><span class="comment"># contributor: Yasser González Fernández &lt;yglez@uh.cu&gt;</span></div><div class="line"><span class="comment"># key: def</span></div><div class="line"><span class="comment"># --</span></div><div class="line">def ${<span class="number">1</span>:name}($<span class="number">2</span>):</div><div class="line">    <span class="string">""</span><span class="string">"$3</span></div><div class="line">    <span class="subst">${<span class="number">2</span>:$</span></div><div class="line">      (<span class="keyword">let</span>*</div><div class="line">        ((indent</div><div class="line">            (concat <span class="string">"\n"</span> (make-string (current-column) <span class="number">32</span>)))</div><div class="line">           (args</div><div class="line">            (mapconcat</div><div class="line">             '(lambda (x)</div><div class="line">                (<span class="keyword">if</span> (not (<span class="variable">string=</span> (nth <span class="number">0</span> x) <span class="string">""</span>))</div><div class="line">                    (concat <span class="string">"- "</span> (char-to-string <span class="number">96</span>) (nth <span class="number">0</span> x)</div><div class="line">                            (char-to-string <span class="number">96</span>) <span class="string">":"</span>)))</div><div class="line">             (mapcar</div><div class="line">              '(lambda (x)</div><div class="line">                 (mapcar</div><div class="line">                  '(lambda (x)</div><div class="line">                     (replace-regexp-<span class="keyword">in</span>-string <span class="string">"[[:blank:]]*$"</span> <span class="string">""</span></div><div class="line">                      (replace-regexp-<span class="keyword">in</span>-string <span class="string">"^[[:blank:]]*"</span> <span class="string">""</span> x)))</div><div class="line">                  x))</div><div class="line">              (mapcar '(lambda (x) (split-string x <span class="string">"="</span>))</div><div class="line">                      (split-string text <span class="string">","</span>)))</div><div class="line">             indent)))</div><div class="line">      (<span class="keyword">if</span> (<span class="variable">string=</span> args <span class="string">""</span>)</div><div class="line">          (make-string <span class="number">3</span> <span class="number">34</span>)</div><div class="line">        (mapconcat</div><div class="line">         'identity</div><div class="line">         (list <span class="string">""</span> <span class="string">"Arguments:"</span> args (make-string <span class="number">3</span> <span class="number">34</span>))</div><div class="line">         indent)))</div><div class="line">    }</div><div class="line">    $0</div></pre></td></tr></table></figure>
 
 <p>以上是python-mode的def的snippet,比原始的更加智能一些.虽然我不知道写了什么….</p>
 <p>好吧等我研究一下了再改,最后说点无关的:Emacs的C-a快捷键移到行首,C-e快捷键移到行尾,很好用,而且非常神奇的是在很多很多的编辑器里面都可以用,比如google的输入框(没做过实验到底是因为google有这个设定还是firefox有这个设定还是vimperator有这个设定,但是博客园编辑器没有),还有markdown编辑器mou,以及命令行终端里,很多时候都不用去找HOME键和END键,先试试C-a和C-e吧.</p>

@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -96,21 +97,7 @@
 <h1 id="这和博弈论又有什么关系呢?">这和博弈论又有什么关系呢?</h1>
 <p>先看一个博弈论中的场景:</p>
 <p>有2个人,A和B(原谅我例子举得如此枯燥连个正经的人名都不想给),他们要合伙去办一件事情,他们可以选择认真和敷衍,而2人都敷衍的话,这个事情会失败,而一个人认真,一个人敷衍的话,显然敷衍的人得了好处,用博弈论的表格来看是这样:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="code">+----+</span>----<span class="code">+----+</span>
-<span class="header">|    |good|bad |
-+----+----+----+</span>
-<span class="header">|good|8,8 |5,10|
-+----+----+----+</span>
-<span class="header">|bad |10,5|2,2 |
-+----+----+----+</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="code">+----+</span>----<span class="code">+----+</span></div><div class="line"><span class="header">|    |good|bad |</span></div><div class="line">+----+----+----+</div><div class="line"><span class="header">|good|8,8 |5,10|</span></div><div class="line">+----+----+----+</div><div class="line"><span class="header">|bad |10,5|2,2 |</span></div><div class="line">+----+----+----+</div></pre></td></tr></table></figure>
 
 <p>我们先入为主地认定道德上认真是好的,这样A和B就形成了一种博弈,与典型的博弈论场景不同,这里的参与博弈的人很可能不止一个,比如公共场所的卫生问题,乱丢垃圾的人显然由于其他人的维护公共卫生的行为获得了利益(方便了他们自己).<br>不过我们先探讨2个人的情况,为什么主流道德会认为认真做事是更加道德的行为,因为认真做事的时候,对于2人的总收益是最大的,而且这种博弈很可能会持续下去,如果AB2人互相威胁说会选bad的话,那么2人都得不到好处,比如A说自己会选bad,从而逼迫B选good的话,在B看来,如果相信A,则自己还是选good更好,但是还有更好的策略,因为A也没有决定,如果这个博弈会进行多次的话,B可以威胁说A选bad的话也会以bad来报复,这样对于理智的A来说是不理想的.于是对于2个理智的人来说,在博弈上都选good会是比较合理的选择.在这种博弈在社会中不断进行的时候,一种类似于道德的东西就产生了,这实际上是古人在不断博弈之中取得的智慧的总结,帮助了每个人为其自己的利益最大化.</p>
 <p>所以从这个角度来看,经过不断的博弈,道德的产生变成了更加自然的事情,道德并不存在于人类之前,只是人类互动的产物之一.</p>

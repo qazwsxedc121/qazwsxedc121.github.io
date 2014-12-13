@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -90,11 +91,11 @@
 		</div>
 		
 		<p>(原来在博客园上的文章,修改了一下去掉没有用的部分)</p>
-<p>最近在折腾emacs这个东西,首先说我曾经算是个极为坚定的VIM党,我在各种IDE里面基本都会要装VIM化的插件,而且我的浏览器Firefox一直有<a href="http://www.vimperator.org/" target="_blank">Vimperator</a>这个插件,现在上网如果不能用d关网页/用t开tab就会觉得难受.那么我为啥还要搞emacs呢?而且眼看着sublime一天天变得流行起来,而emacs基本没什么新人在用,我为啥又在这个时候折腾emacs呢?</p>
+<p>最近在折腾emacs这个东西,首先说我曾经算是个极为坚定的VIM党,我在各种IDE里面基本都会要装VIM化的插件,而且我的浏览器Firefox一直有<a href="http://www.vimperator.org/" target="_blank" rel="external">Vimperator</a>这个插件,现在上网如果不能用d关网页/用t开tab就会觉得难受.那么我为啥还要搞emacs呢?而且眼看着sublime一天天变得流行起来,而emacs基本没什么新人在用,我为啥又在这个时候折腾emacs呢?</p>
 <p>理由其实也不是很充分,但是对我而言已经够了:</p>
 <ol>
 <li>Emacs是用Lisp的最经典的程序了,作为试图成为Lisper的人,emacs最起码应该使用过.君不见github上最流行的lisp方言就是emacs lisp(虽然绝大部分repo都是大家把各自的emacs配置放上去了而已)</li>
-<li>Emacs是Hacker的选择,首先开发者RMS神不用说了(如果不知道这位的话建议不要用Emacs来进行工作,我现在觉得Emacs也确实是不太适合大众用的东西,只适合对于文本编辑效率极高的人群,最典型的就是码农),其次大量知名人士使用 <a href="http://wenshanren.org/?p=386" target="_blank">著名Emacs用户列表</a> ,虽说并不是别人用什么你就改用什么,但至少你能确定这不是一个糟糕的选择.</li>
+<li>Emacs是Hacker的选择,首先开发者RMS神不用说了(如果不知道这位的话建议不要用Emacs来进行工作,我现在觉得Emacs也确实是不太适合大众用的东西,只适合对于文本编辑效率极高的人群,最典型的就是码农),其次大量知名人士使用 <a href="http://wenshanren.org/?p=386" target="_blank" rel="external">著名Emacs用户列表</a> ,虽说并不是别人用什么你就改用什么,但至少你能确定这不是一个糟糕的选择.</li>
 <li>最近写clojure,对于括号的操作很重要,而paredit让写lisp轻松了一些.</li>
 <li>本人相对来说还是不是特别怕折腾的</li>
 </ol>
@@ -114,25 +115,13 @@
 <p>既然emacs是是众所周知的难于配置,自然有拯救苍生的各位大大想让更多的菜鸟能用上神器.于是乎出现了不少文章帮助菜鸟度过难关,其实只要经常搜一下就会找到他们的博客,例如emacs中文网,李杀网等很多地方.另外还有些大大分享了他们的配置文件供我们上手快一些,我这里用的是emacs-starter-kit, 注意它的作者是leiningen的作者,非常值得借鉴.Emacs-starter-kit的github页面上有关于如何使用的说明.没有它的话天知道又有多少人会把光阴白白送在一些非常基础的设置之中了.</p>
 <h2 id="Package-el">Package.el</h2>
 <p>以前的Emacs的插件管理方式非常的原始,都是直接把插件的el文件放在.emac.d文件夹下,并不区分插件和配置文件,这对于插件的管理/升级/卸载都十分的不便,后来就有了package.el插件来帮助设置插件.最后Emacs的作者们终于在Emacs的24版中内置了插件管理,为我们省却了很多功夫.在安装emacs-starter-kit的时候指南上就介绍我们要在init.el中写</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="list">(<span class="title">require</span> 'package)</span>
-<span class="list">(<span class="title">add-to-list</span> 'package-archives
-             <span class="quoted">'(<span class="string">"marmalade"</span> . <span class="string">"http://marmalade-repo.org/packages/"</span>)</span> <span class="literal">t</span>)</span>
-<span class="list">(<span class="title">package-initialize</span>)</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="list">(<span class="title">require</span> <span class="quoted">'package</span>)</span></div><div class="line"><span class="list">(<span class="title">add-to-list</span> <span class="quoted">'package-archives</span></span></div><div class="line">             <span class="quoted">'(<span class="string">"marmalade"</span> . <span class="string">"http://marmalade-repo.org/packages/"</span>)</span> <span class="literal">t</span>)</div><div class="line"><span class="list">(<span class="title">package-initialize</span>)</span></div></pre></td></tr></table></figure>
 
 <p>这里第一行是说加载package.el这个包,2~3行说为package.el中加入marmalade的源来获取包,第4行是初始化包.刚开始的时候不需要明白到底这些都是啥.只要不要随便就删掉它们就好了.</p>
 <p>这些代码算是设置好了软件源,就跟我们在ubuntu上设apt-get的源一样.但是我在尝试sr-speedbar这个包的时候发现安装时会出一些问题,没有办法装上去,在github上找到了sr-speedbar的代码,发现由于兼容性问题在最近的2013年才被修正过,而marmalade上的版本是2009年的,就是说如果用marmalade的话就没有办法正确安装,我现在暂时还不会hack package中的代码(何况这样就失去了package打包安装的意义),尝试了一下byte-recompile等指令发现还是不太会,在即将放弃这个插件之际想到,如果有别的源说不定已经更新了,由此在emacs wiki上又找到了下面的配置</p>
-<p><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="list">(<span class="title">setq</span> package-archives <span class="quoted">'((<span class="string">"gnu"</span> . <span class="string">"http://elpa.gnu.org/packages/"</span>)
-                         (<span class="string">"marmalade"</span> . <span class="string">"http://marmalade-repo.org/packages/"</span>)
-                         (<span class="string">"melpa"</span> . <span class="string">"http://melpa.milkbox.net/packages/"</span>))</span>)</span>
-</pre></td></tr></table></figure><br>用上面这3行取代前面的2~3行代码就可以了,其实意思就是将melpa这个源加入package的软件源而已.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="list">(<span class="title">setq</span> package-archives <span class="quoted">'((<span class="string">"gnu"</span> . <span class="string">"http://elpa.gnu.org/packages/"</span>)</span></span></div><div class="line">                         (<span class="string">"marmalade"</span> . <span class="string">"http://marmalade-repo.org/packages/"</span>)</div><div class="line">                         (<span class="string">"melpa"</span> . <span class="string">"http://melpa.milkbox.net/packages/"</span>)))</div></pre></td></tr></table></figure>
+
+<p>用上面这3行取代前面的2~3行代码就可以了,其实意思就是将melpa这个源加入package的软件源而已.</p>
 <p>加入Melpa这个源以后,运行list-packages这个指令时会发现显著变慢了,然后可以看到很多版本号都变成了日期,同时后面会有[github]等字样,这是什么意思呢?上melpa这个网站可以看到,它的原理和marmalade是不同的,它基于版本控制系统自动生成package,就是说只要作者将代码更新了commit以后,melpa就会更新,不需要再等作者打包放到marmalade上面,而且如果原作者早就忘了更新这个事的话还有其他人帮忙更新代码,这样显然是更好的方式,sr-speedbar就是这样做的.</p>
 <p>所以当然立即将melpa加入-&gt;更新-&gt;搞定!</p>
 <p>现在emacs依然有很多人在为其开发插件,可以说其文件编辑功能依然是领先的.只是有不少老的插件没有为新版做更新,也需要整个社区的努力.</p>

@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -92,20 +93,16 @@
 		<p>如何让所有人都能确信一个抽奖是公平的?这是一个问题.</p>
 <p>当然现在大家所用的方法是将彩票机的抽取过程给录制视频了,但实际上依然有不少人会指责视频有假,大家自行搜索”福利彩票内幕”之类的东西也能了解到.我不确定其真假也不想妄加评论,但是之后产生了一个想法:如何做到让参与者能确信这个结果是”随机抽取”,而不是”刻意分配”的?</p>
 <p>我近来想到一种方法,通过sha或者md5这种类型的算法来做抽奖过程.原理很简单,我们假设将每个人的名字连成一个字符串.然后对这个字符串做sha256,将得到的结果值取mod(抽奖的人数),这样会得到一个整数,表示抽奖的人的序号.(算法0)当然,现在我们这个算法还有问题,接下来就逐渐解决他们.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="setting">winner = <span class="value">sha256(<span class="string">"张三李四王五"</span>) % <span class="number">3</span></span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">winner = sha256(<span class="string">"张三李四王五"</span>) <span class="comment">% 3</span></div></pre></td></tr></table></figure>
 
 <p>首先:这个抽奖结果貌似是固定的? 是的,在参与人的顺序和名字不变的前提下当然得到的sha256值是固定的,也就是说同样这么多人只会产生一样的结果.那么怎么改进呢?我们可以让每个人改动自己的名字!其实也就是让每个人自己选择要用什么信息加入这个大字符串,这里我们稍微变化一下,让每个人的信息为”邮箱”+”自选字符串”,用邮箱来作为id,防止一个人参与很多次.为什么不直接是自选字符串是因为怕其他人懒,只选择空字符串,这样会对小型的抽奖来说存在不稳定因素.(算法1)</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>winner = sha256(<span class="string">"zhangsan<span class="variable">@t</span>.com我是张三lisi<span class="variable">@t</span>.comwangwu<span class="variable">@t</span>.com"</span>) % <span class="number">3</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">winner</span> = sha256(<span class="string">"zhangsan<span class="variable">@t</span>.com我是张三lisi<span class="variable">@t</span>.comwangwu<span class="variable">@t</span>.com"</span>) % <span class="number">3</span></div></pre></td></tr></table></figure>
 
 <p>这里其实就可以在实际的抽奖中使用了,为什么它是公平的呢? 是因为每个参与者都可以完全的改变抽奖的结果.这一点是由sha或者md系列的信息摘要算法保证的,只要一个字符串有任何一点改动,我们都可以知道改动前后的摘要结果是完全不同的,每一个参与者提供的自选字符串事实上都对结果重新洗牌,因为不止有一个参与者,所以这个结果是不可能被”决定”的而抽奖结束之后参与和就可以根据公布出来的数据来自行验证抽奖没有作弊了.</p>
 <p>另外还有一些问题,随着参与者的增加抽奖结果在不断变化! 是的,但是实际中所有的抽奖都会有截止日期的概念,也就是说其实抽奖开始时参与者都已经确定了,故而不会存在结果会变的问题.</p>
 <p>如果考虑作弊的话,最后一名参与者是可能作弊的? 如果最后一名参与者掌握了之前所有参与者的信息的话的确有可能会作弊,即他可以尝试任意的字符串,(因为他自己可以做无数次抽奖),直到结果指向他自己,或者某个特定的参与者. 这种行为又如何避免呢? 事实上可以通过加入时间的因素来避免作弊, 即将我们的”邮箱”+”自选字符串”+”时间戳”作为每个人的信息的一部分(算法3),这样最后一个参与者需要考虑他自己的时间戳的问题,而他并不知道自己的时间戳会在什么时间(服务器的时间戳可以自定义).这样的话就能保证即便最后一名参与者即使有之前所有人的数据也不能成功,何况可能会存在同样赶在截止时间前提交的参与者打乱他的计划.</p>
 <p>主要过程就是这样,其实很好理解,验证也很方便,下载数据自己跑一遍就得了.”什么?得奖的为什么不是我?那要怪我自己的自选字符串没有碰对运气.”</p>
-<p>我自己做了一个网站,还没有上线,但是整套东西都是开源的,地址在<a href="https://github.com/qazwsxedc121/fair-lottery" target="_blank">fair lottery</a>,只需要有clojure环境和mongodb数据库既可以运行于自己的服务器上.欢迎提交issue来提出你想要的功能.</p>
+<p>我自己做了一个网站,还没有上线,但是整套东西都是开源的,地址在<a href="https://github.com/qazwsxedc121/fair-lottery" target="_blank" rel="external">fair lottery</a>,只需要有clojure环境和mongodb数据库既可以运行于自己的服务器上.欢迎提交issue来提出你想要的功能.</p>
   
 	</div>
 		<footer class="article-footer clearfix">
